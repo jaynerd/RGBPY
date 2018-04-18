@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGBPY_v3", "Assembly-CSharp.csproj", "{E17E886C-2A9B-DA7C-039C-05A85BC2488D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E17E886C-2A9B-DA7C-039C-05A85BC2488D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17E886C-2A9B-DA7C-039C-05A85BC2488D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17E886C-2A9B-DA7C-039C-05A85BC2488D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17E886C-2A9B-DA7C-039C-05A85BC2488D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
