@@ -51,7 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\HexagonRotator.cs" />
+     <Compile Include="Assets\Scripts\Draft.cs" />
+     <Compile Include="Assets\Scripts\Hexagon.cs" />
      <Compile Include="Assets\Scripts\Settings.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
