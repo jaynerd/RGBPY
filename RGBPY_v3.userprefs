@@ -3,8 +3,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Settings.cs">
     <Files>
       <File FileName="Assets\Scripts\Draft.cs" Line="7" Column="1" />
-      <File FileName="Assets\Scripts\Hexagon.cs" Line="14" Column="64" NotebookId="1" />
-      <File FileName="Assets\Scripts\Settings.cs" Line="12" Column="52" NotebookId="1" />
+      <File FileName="Assets\Scripts\Hexagon.cs" Line="21" Column="2" NotebookId="1" />
+      <File FileName="Assets\Scripts\SquareManager.cs" Line="89" Column="35" NotebookId="1" />
+      <File FileName="Assets\Scripts\Settings.cs" Line="17" Column="42" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
