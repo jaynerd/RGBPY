@@ -16,9 +16,16 @@ public class SquareManager : MonoBehaviour
 	private float minDistance = Settings.squareMinDistance;
 	private float frameRate = Settings.coroutineFrameRate;
 
+	private FXManager fxManager;
+
 	private void Awake ()
 	{
 		Init ();
+	}
+
+	private void Start ()
+	{
+		fxManager = FXManager.instance;
 	}
 
 	// initialize.
@@ -56,6 +63,7 @@ public class SquareManager : MonoBehaviour
 	{
 		if (!isSelected) {
 			iSquare = square;
+			fxManager.EmitSpray (square.tag);
 			isSelected = true;
 		} else {
 			tSquare = square;
@@ -63,10 +71,12 @@ public class SquareManager : MonoBehaviour
 		}
 	}
 
+	// clearing all selections.
 	private void ClearSelection ()
 	{
 		if (isSelected) {
 			isSelected = false;
+			fxManager.StopAllSpray ();
 		}
 	}
 
@@ -87,6 +97,7 @@ public class SquareManager : MonoBehaviour
 			if (Vector2.Distance (iSquare.transform.position, tPos) < minDistance) {
 				iSquare.transform.position = tPos;
 				tSquare.transform.position = iPos;
+				fxManager.StopSpray (iSquare.tag);
 				Init ();
 				break;
 			}
