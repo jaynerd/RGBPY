@@ -54,7 +54,10 @@
      <Compile Include="Assets\Scripts\Draft.cs" />
      <Compile Include="Assets\Scripts\FXManager.cs" />
      <Compile Include="Assets\Scripts\Hexagon.cs" />
+     <Compile Include="Assets\Scripts\MainCam.cs" />
+     <Compile Include="Assets\Scripts\RingFlash.cs" />
      <Compile Include="Assets\Scripts\Settings.cs" />
+     <Compile Include="Assets\Scripts\Square.cs" />
      <Compile Include="Assets\Scripts\SquareManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
