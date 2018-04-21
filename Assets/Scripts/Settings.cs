@@ -2,8 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ * Author: Namyoon Kim
+ * 
+ * This class contains specific settings for the core gameplay functions.
+ * Should be changed with a caution, since some values will cause critical
+ * issues that might prevent the actual gameplay running through.
+ **/
+
 public class Settings : MonoBehaviour
 {
+	// the base framerate of all coroutines.
 	public static float coroutineFrameRate = 30f;
 
 	#region Hexagon attributes
@@ -19,13 +28,8 @@ public class Settings : MonoBehaviour
 	#region Square attributes
 
 	public static float squareSwapSpeed = 20f;
+	public static float squareSprayDelay = 1.5f;
 	public static float squareMinDistance = 0.05f;
-
-	#endregion
-
-	#region Particle attributes
-
-	public static float fxSprayDelay = 1.5f;
 
 	#endregion
 }

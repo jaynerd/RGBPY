@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ * Author: Namyoon Kim
+ * 
+ * This class manages combined behaviour of each square prefabs.
+ * Primarily controls a transition between initial and target squares.
+ **/
+
 public class SquareManager : MonoBehaviour
 {
-	private Vector2 iPos;
-	private Vector2 tPos;
+	public static SquareManager Instance;
+
+	private Square square;
+	private Square[] squares;
 	private GameObject iSquare;
 	private GameObject tSquare;
+	private Vector2 iPos;
+	private Vector2 tPos;
 
 	private bool isMoving;
 	private bool isSelected;
@@ -16,19 +27,14 @@ public class SquareManager : MonoBehaviour
 	private float minDistance = Settings.squareMinDistance;
 	private float frameRate = Settings.coroutineFrameRate;
 
-	private FXManager fxManager;
-
 	private void Awake ()
 	{
+		Instance = this;
+		squares = GetComponentsInChildren<Square> ();
 		Init ();
 	}
 
-	private void Start ()
-	{
-		fxManager = FXManager.instance;
-	}
-
-	// initialize.
+	// initialization.
 	private void Init ()
 	{
 		isMoving = false;
@@ -39,65 +45,82 @@ public class SquareManager : MonoBehaviour
 	private void Update ()
 	{
 		if (Input.GetMouseButtonDown (0)) {
-			Click ();
-		}
-	}
-
-	// check if player clicked any squares.
-	private void Click ()
-	{
-		Vector3 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		RaycastHit2D hit = Physics2D.Raycast (mousePosition, Vector2.zero);
-		if (hit.collider != null) {
-			GameObject obj = hit.collider.gameObject;
-			if (!isMoving && obj.layer.Equals (gameObject.layer)) {
-				SelectSquare (obj);
-				return;
+			bool isSquareClicked = CheckMousePosition ();
+			if (!isSquareClicked) {
+				ClearSelection ();
 			}
 		}
-		ClearSelection ();
 	}
 
-	// set either initial or target square under the condition.
-	private void SelectSquare (GameObject square)
+	// check if any squares are clicked.
+	private bool CheckMousePosition ()
 	{
-		if (!isSelected) {
-			iSquare = square;
-			fxManager.EmitSpray (square.tag);
-			isSelected = true;
-		} else {
-			tSquare = square;
-			StartCoroutine (Swap ());
+		Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		RaycastHit2D hit = Physics2D.Raycast (mousePos, Vector2.zero);
+		if (hit.collider != null) {
+			GameObject obj = hit.collider.gameObject;
+			if (obj.layer.Equals (gameObject.layer)) {
+				return true;
+			}
 		}
+		return false;
 	}
 
-	// clearing all selections.
+	// clearing the last selection when no squares are chosen,
+	// or upon completion of the most recent transition.
 	private void ClearSelection ()
 	{
 		if (isSelected) {
 			isSelected = false;
-			fxManager.StopAllSpray ();
+			for (int i = 0; i < squares.Length; i++) {
+				squares [i].StopSpray ();
+			}
 		}
 	}
 
-	// swapping positions of two selected squares.
+	// set either initial or target square under the given condition.
+	public void SelectSquare (Square square)
+	{
+		if (!isMoving) {
+			if (!isSelected) {
+				this.square = square;
+				iSquare = square.gameObject;
+				square.EmitSpray ();
+				isSelected = true;
+			} else {
+				tSquare = square.gameObject;
+				if (iSquare.Equals (tSquare)) {
+					ClearSelection ();
+					return;
+				}
+				StartCoroutine (Swap ());
+			}
+		}
+	}
+
+	// inter-changing positions of two selected squares.
 	private IEnumerator Swap ()
 	{
 		isMoving = true;
-		// setting target positions.
+
+		// setting destinations
 		iPos = iSquare.transform.position;
 		tPos = tSquare.transform.position;
+
 		while (true) {
 			yield return new WaitForSeconds (1f / frameRate);
 			float speed = swapSpeed * Time.deltaTime;
+
 			// lerping between two positions.
 			iSquare.transform.position = Vector2.Lerp (iSquare.transform.position, tPos, speed);
 			tSquare.transform.position = Vector2.Lerp (tSquare.transform.position, iPos, speed);
-			// checking distance between each selected squares origin and destination.
+
+			// checking the distance between each of selected squares origin
+			// and destination.
 			if (Vector2.Distance (iSquare.transform.position, tPos) < minDistance) {
 				iSquare.transform.position = tPos;
 				tSquare.transform.position = iPos;
-				fxManager.StopSpray (iSquare.tag);
+				StartCoroutine (square.StopSprayAfter ());
 				Init ();
 				break;
 			}
