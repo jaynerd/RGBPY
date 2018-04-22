@@ -6,8 +6,8 @@ using UnityEngine;
  * Author: Namyoon Kim
  * 
  * This class contains specific settings for the core gameplay functions.
- * Should be changed with a caution, since some values will cause critical
- * issues that might prevent the actual gameplay running through.
+ * Any changes should be applied with a caution, since some changes will
+ * cause critical issues.
  **/
 
 public class Settings : MonoBehaviour

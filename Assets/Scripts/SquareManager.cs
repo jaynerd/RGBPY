@@ -103,7 +103,7 @@ public class SquareManager : MonoBehaviour
 	{
 		isMoving = true;
 
-		// setting destinations
+		// setting destinations.
 		iPos = iSquare.transform.position;
 		tPos = tSquare.transform.position;
 
@@ -120,7 +120,7 @@ public class SquareManager : MonoBehaviour
 			if (Vector2.Distance (iSquare.transform.position, tPos) < minDistance) {
 				iSquare.transform.position = tPos;
 				tSquare.transform.position = iPos;
-				StartCoroutine (square.StopSprayAfter ());
+				square.StopSprayAfter ();
 				Init ();
 				break;
 			}

@@ -6,7 +6,7 @@ using UnityEngine;
  * Author: Namyoon Kim
  * 
  * This class controls overall behaviour of squares.
- * Should be attached to individual square prefabs.
+ * Should be attached to individual square prefabs in the scene.
  **/
 
 public class Square : MonoBehaviour
@@ -23,16 +23,13 @@ public class Square : MonoBehaviour
 
 	#endregion
 
-	private void Awake ()
-	{
-		// getting spray particle components.
-		spray = transform.GetChild (0).gameObject;
-		sprayParticles = spray.GetComponentsInChildren<ParticleSystem> ();
-	}
-
 	private void Start ()
 	{
 		squareManager = SquareManager.Instance;
+
+		// getting spray particle components.
+		spray = transform.GetChild (0).gameObject;
+		sprayParticles = spray.GetComponentsInChildren<ParticleSystem> ();
 	}
 
 	private void OnMouseDown ()
@@ -43,8 +40,8 @@ public class Square : MonoBehaviour
 	// activating the spray gameobject.
 	public void EmitSpray ()
 	{
-		// initializing particle.
-		spray.SetActive (false);
+		// initializing the particle.
+		StopSpray ();
 		spray.SetActive (true);
 
 		// enabling looping property.
@@ -57,12 +54,17 @@ public class Square : MonoBehaviour
 	// instantly stops & deactivates spray components.
 	public void StopSpray ()
 	{
-		StopCoroutine (StopSprayAfter ());
+		StopCoroutine ("cStopSprayAfter");
 		spray.SetActive (false);
 	}
 
 	// stops spraying after a given delay.
-	public IEnumerator StopSprayAfter ()
+	public void StopSprayAfter ()
+	{
+		StartCoroutine ("cStopSprayAfter");
+	}
+
+	public IEnumerator cStopSprayAfter ()
 	{
 		yield return new WaitForSeconds (sprayDelay * 0.5f);
 		// disabling looping property.
@@ -71,7 +73,7 @@ public class Square : MonoBehaviour
 			sprayParticle.loop = false;
 		}
 		yield return new WaitForSeconds (sprayDelay);
-		spray.SetActive (false);
+		StopSpray ();
 	}
 
 	//	private void Start ()
