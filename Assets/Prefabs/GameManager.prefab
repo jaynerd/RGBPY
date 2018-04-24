@@ -509,9 +509,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - quantity: 0
+  - quantity: 25
     parent: {fileID: 0}
-    prefab: {fileID: 0}
+    prefab: {fileID: 1029256437151886, guid: cb78ed18f2cccbc498b511a1451f5118, type: 2}
+  - quantity: 25
+    parent: {fileID: 0}
+    prefab: {fileID: 1348666394257604, guid: c56861deccf17a24aa9e2749e277cc15, type: 2}
+  - quantity: 25
+    parent: {fileID: 0}
+    prefab: {fileID: 1701428491540644, guid: 7275e65623b306842a0026bf63b53a2c, type: 2}
+  - quantity: 25
+    parent: {fileID: 0}
+    prefab: {fileID: 1879688303655960, guid: 26105dffa70a83a469c60b2de3e79dd5, type: 2}
+  - quantity: 25
+    parent: {fileID: 0}
+    prefab: {fileID: 1739102954743410, guid: 7fd50712349ebcb42af63d843875026e, type: 2}
 --- !u!198 &198598676696620538
 ParticleSystem:
   m_ObjectHideFlags: 1

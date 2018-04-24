@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class Square : MonoBehaviour
 {
+	private MainCam mainCam;
 	private SquareManager squareManager;
 
 	#region Spray
@@ -25,6 +26,7 @@ public class Square : MonoBehaviour
 
 	private void Start ()
 	{
+		mainCam = MainCam.Instance;
 		squareManager = SquareManager.Instance;
 
 		// getting spray particle components.
@@ -35,6 +37,16 @@ public class Square : MonoBehaviour
 	private void OnMouseDown ()
 	{
 		squareManager.SelectSquare (this);
+	}
+
+	// actions performed upon collision with right tagged objects (circle & hexagon).
+	private void OnCollisionEnter2D (Collision2D col)
+	{
+		if (col.gameObject.tag.Equals (gameObject.tag)) {
+			col.gameObject.SetActive (false);
+			//fxManager.pop(col.transform.position, gameObject.tag);
+			mainCam.Shake ();
+		}
 	}
 
 	// activating the spray gameobject.
@@ -75,19 +87,4 @@ public class Square : MonoBehaviour
 		yield return new WaitForSeconds (sprayDelay);
 		StopSpray ();
 	}
-
-	//	private void Start ()
-	//	{
-	//		//	mainCamera = MainCam.Instance;
-	//
-	//	}
-	//
-	//	private void OnCollisionEnter2D (Collision2D col)
-	//	{
-	//		if (col.gameObject.tag.Equals (gameObject.tag)) {
-	//			col.gameObject.SetActive (false);
-	//			//fxManager.pop(col.transform.position, gameObject.tag);
-	//			//mainCamera.StartShake();
-	//		}
-	//	}
 }

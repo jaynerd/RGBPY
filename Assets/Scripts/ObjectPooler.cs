@@ -5,14 +5,15 @@ using UnityEngine;
 /** 
  * Author: Namyoon Kim
  * 
- * This class manages to create pools for each registered prefabs.
+ * This class controls the creation of object pools for each of the
+ * registered prefabs.
  **/
 
 [System.Serializable]
 public class Item
 {
-	// register prefabs with quantities to be spawned, parent transformation,
-	// and the prefab itself.
+	// register prefabs with a quantity to be spawned, parent transformation,
+	// and the original prefab itself.
 	public int quantity;
 	public Transform parent;
 	public GameObject prefab;
@@ -27,6 +28,7 @@ public class ObjectPooler : MonoBehaviour
 		CreatePools ();	
 	}
 
+	// creates pools of prefabs.
 	private void CreatePools ()
 	{
 		for (int i = 0; i < items.Count; i++) {
@@ -40,6 +42,7 @@ public class ObjectPooler : MonoBehaviour
 		}
 	}
 
+	// creates a single item in the assigned pool.
 	private void CreateItem (Transform parent, GameObject prefab)
 	{
 		GameObject item = Instantiate<GameObject> (prefab);

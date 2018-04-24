@@ -15,6 +15,13 @@ public class Settings : MonoBehaviour
 	// the base framerate of all coroutines.
 	public static float coroutineFrameRate = 30f;
 
+	#region Camera attributes
+
+	public static float cameraShakeDuration = 0.2f;
+	public static float cameraShakeMagnitude = 0.1f;
+
+	#endregion
+
 	#region Hexagon attributes
 
 	public static float hexagonInitialDelay = 2f;
