@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ * Author: Namyoon Kim
+ * 
+ * This class manages to create pools for each registered prefabs.
+ **/
+
 [System.Serializable]
 public class Item
 {
+	// register prefabs with quantities to be spawned, parent transformation,
+	// and the prefab itself.
 	public int quantity;
 	public Transform parent;
 	public GameObject prefab;
